@@ -21,7 +21,8 @@ void loop() {
   float distanceCm;
   Wire.beginTransmission(0x08);   // transmit to slave device address 8
   Wire.write("Forwards1second");  // send five bytes, one for each character
-  Wire.endTransmission();          // end transmission, Sends Forwards1second to Arduino, which will activate Forwards1second
+  Wire.endTransmission();// end transmission, Sends Forwards1second to Arduino, which will activate Forwards1second
+  delay(1000);
   mpu6050.calcGyroOffsets(true);        
 
   Wire.beginTransmission(0x08);  //transmit to slave device
@@ -33,6 +34,7 @@ void loop() {
   Wire.beginTransmission(0x08);
   Wire.write("stopMotors");  //Car will then stop
   Wire.endTransmission();
+  delay(1000);
   mpu6050.calcGyroOffsets(true);
    
   Wire.beginTransmission(0x08);
@@ -52,6 +54,7 @@ void loop() {
   Wire.beginTransmission(0x08);
   Wire.write("stopMotors");  //Once distance is equal to 10cm Car will stop
   Wire.endTransmission();
+  delay(1000);
   mpu6050.calcGyroOffsets(true);
 
   Wire.beginTransmission(0x08);
