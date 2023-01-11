@@ -33,7 +33,7 @@ void setup() {
   pinMode(INd, OUTPUT);
   pinMode(enA, OUTPUT);
   pinMode(enB, OUTPUT);                     
-  speedSetting = 255;
+  speedSetting = 100;
 }
 
  void loop() {
