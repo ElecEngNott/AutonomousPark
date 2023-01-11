@@ -69,7 +69,7 @@ void loop() {
   Wire.beginTransmission(0x08);
   Wire.write("GoBackwards");  //Car will then reverse
   Wire.endTransmission();
-  float distanceCm = 30;
+  distanceCm = 30;
   while (distanceCm <= 10) {     //Check distance until it is less than or equal to 10cm
     digitalWrite(trigPin, LOW);  //Clear Trig Pin
     delayMicroseconds(2);
