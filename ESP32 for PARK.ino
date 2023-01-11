@@ -18,7 +18,7 @@ void setup() {
 
 void loop() {
   float duration;
-  float distanceCm;
+  float distanceCm = 30;
   Wire.beginTransmission(0x08);   // transmit to slave device address 8
   Wire.write("Forwards1second");  // send five bytes, one for each character
   Wire.endTransmission();// end transmission, Sends Forwards1second to Arduino, which will activate Forwards1second
@@ -38,7 +38,7 @@ void loop() {
   mpu6050.calcGyroOffsets(true);
    
   Wire.beginTransmission(0x08);
-  Wire.write("GoBackwards");  //CCar will then reverse
+  Wire.write("GoBackwards");  //Car will then reverse
   Wire.endTransmission();
   while (distanceCm <= 10) {     //Check distance until it is less than or equal to 10cm
     digitalWrite(trigPin, LOW);  //Clear Trig Pin
@@ -64,5 +64,21 @@ void loop() {
   Wire.beginTransmission(0x08);
   Wire.write("stopMotors");
   Wire.endTransmission();
-   mpu6050.calcGyroOffsets(true);
+  mpu6050.calcGyroOffsets(true);
+     
+  Wire.beginTransmission(0x08);
+  Wire.write("GoBackwards");  //Car will then reverse
+  Wire.endTransmission();
+  float distanceCm = 30;
+  while (distanceCm <= 10) {     //Check distance until it is less than or equal to 10cm
+    digitalWrite(trigPin, LOW);  //Clear Trig Pin
+    delayMicroseconds(2);
+    digitalWrite(trigPin, HIGH);  //Emit Ultrasonic signal
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);  //Clear trig pin again
+    duration = pulseIn(echoPin, HIGH);        // Activate EchoPin to recieve Signal
+    distanceCm = duration * SOUND_SPEED / 2;  //Calculate Distance
+    Serial.print("Distance (cm): ");          //Print out distance to serial Monitor
+    Serial.println(distanceCm);
+  }
 }
